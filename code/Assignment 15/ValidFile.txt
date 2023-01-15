@@ -1,0 +1,32 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class Parser {
+
+	public Parser()
+	{
+
+	}
+
+	public void parseFile(String fileName) throws Exception
+	{
+		try 
+		{
+			Scanner inputFile = new Scanner(new File(fileName));
+			int lineNumber = 1;
+			while (inputFile.hasNextLine())
+			{
+				String line = inputFile.nextLine();
+				for (int i = 0; i < line.length(); i++)
+				{
+					System.out.println(line.charAt(i) + " at Line: " + lineNumber + " Character: " + (i+1));
+				}
+			}
+		} 
+		catch (FileNotFoundException e) {
+			throw e;
+		}
+
+	}
+}
