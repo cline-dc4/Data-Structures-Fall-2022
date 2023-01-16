@@ -1,0 +1,113 @@
+/**
+ * This class creates an Event object.
+ * Homework #3
+ * Due 9/12/22
+ * @author DC
+ * @version 9/11/22
+ */
+public class Event 
+{
+	
+	public static final char INDOORS = 'i';
+	public static final char OUTDOORS = 'o';
+
+	public Event()
+	{
+		setName("");
+		setCost(1);
+		setLocation('i');
+	}
+	/**
+	 * Constructor for event objects.
+	 * @param newName a String that is the name of the event.
+	 * @param newCost a double that is the cost of the event.
+	 * @param newLocation a char, either 'i' or 'o' for indoors/outdoors.
+	 */
+	public Event(String newName, double newCost, char newLocation)
+	{
+		setName(newName);
+		setCost(newCost);
+		setLocation(newLocation);
+	}
+	
+	/**the name of the event*/
+	private String name;
+	
+	/**the cost of the event*/
+	private double cost;
+	
+	/**should be 'i' or 'o', describes whether
+	 * event is inside or outside. */
+	private char location;
+	
+	/**
+	 * the getter for name.
+	 * @return the name of this event.
+	 */
+	public String getName()
+	{
+		return name;
+	}
+
+	/**
+	 * the setter for the name.
+	 * @param name the new name for the event.
+	 */
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+
+	/**
+	 * the getter for cost.
+	 * @return the cost of this event.
+	 */
+	public double getCost() 
+	{
+		return cost;
+	}
+
+	/**
+	 * the setter for the cost.
+	 * @param cost the new cost of the event.
+	 */
+	public void setCost(double cost)
+	{
+		this.cost = cost;
+	}
+
+	/**
+	 * the getter for location
+	 * @return a char 'i' or 'o', i for indoors and o for outdoors.
+	 */
+	public char getLocation() 
+	{
+		return location;
+	}
+
+	/**
+	 * the setter for location.
+	 * @param location Should send either 'i' or 'o',
+	 * i for indoors and o for outdoors.
+	 */
+	public void setLocation(char location)
+	{
+		this.location = location;
+	}
+	
+	/**
+	 * Converts the objects information to a string.
+	 */
+	public String toString()
+	{
+		String s = "";
+		s += "Name: " + name;
+		s += " Cost: " + cost;
+		if(location == INDOORS)
+			s += " Hosted indoors";
+		else if(location == OUTDOORS)
+			s += " Hosted outdoors";
+		return s;
+	}
+
+}

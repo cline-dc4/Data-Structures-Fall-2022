@@ -1,0 +1,16 @@
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class TestCases {
+
+	@Test
+	void test() 
+	{
+		assertTrue(Methods.countFactors(1) == 0);
+		assertTrue(Methods.countFactors(2) == 2);
+		assertTrue(Methods.countFactors(10) == 4);
+		assertTrue(Methods.countFactors(12) == 6);
+	}
+
+}

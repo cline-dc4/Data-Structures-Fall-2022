@@ -1,0 +1,46 @@
+import java.util.Scanner;
+
+public class ConsoleMain 
+{
+	/**
+	 * the main function for running Mastermind in the console.
+	 */
+	public static void main(String[] args)
+	{
+		//instance variables:
+		Scanner keyboard = new Scanner(System.in);
+		MastermindBackend game = new MastermindBackend();
+		char [] guessArray = new char[4];
+		while(game.getNumberGuesses() < 10 || !game.win)
+		{
+			System.out.println(game.codeArray);
+			System.out.println(game);
+			// TODO most of the code...
+			System.out.println("Please enter your guess. It must be 4 seperate characters chosen from the key at the top.");
+			for(int i = 0; i < guessArray.length; i++)
+			{
+				guessArray[i] = keyboard.next().charAt(0);
+			}
+			try 
+			{
+				game.submitGuess(guessArray);
+			} 
+			catch (Exception e) 
+			{
+				e.getStackTrace();
+			}
+			//increase numberGuesses by 1.
+			game.incrementNumberGuesses();
+		}
+		if (game.getNumberGuesses() == 10)
+		{
+			System.out.println("Sorry! You lost the game.");
+		}
+		else
+		{
+			System.out.println("You win! Your score is: " + game.calculateScore());
+		}
+
+	}
+
+}

@@ -1,0 +1,8 @@
+
+public class Methods 
+{
+	public static int countFactors(int inputNumber)
+	{
+		return 0;
+	}
+}

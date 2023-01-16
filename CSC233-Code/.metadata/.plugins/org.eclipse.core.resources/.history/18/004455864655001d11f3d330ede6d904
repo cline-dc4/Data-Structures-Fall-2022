@@ -1,0 +1,55 @@
+
+public class SortedLinkedList 
+{
+	/** The length of the list.*/
+	private int length;
+	/** A sentinel node that is the first node in the list. */
+	private Node head;
+	
+	/**
+	 * The constructor for the SortedLinkedList
+	 * creates the head and sets length to 0.
+	 */
+	public SortedLinkedList()
+	{
+		length = 0;
+		head = new Node();
+	}
+	
+	/**
+	 * adds a node with specified data into the list, 
+	 * maintaining alphabetical order.
+	 * @param data the data the node should hold.
+	 * @throws Exception when the index is either < 0 or index > length.
+	 */
+	public void addNode(String data)
+	{
+		//incrementing p until the string > the one stored already,
+		//or until the string is in alphabetical order.
+		Node p = head;
+		for (int i = 0; i < length; i++)
+		{
+			p = p.getNext();
+			if (p.getNext().getData().compareToIgnoreCase(data) >= 0)
+			{
+				break;
+			}
+		}
+		Node newNode = new Node(data);
+		newNode.setNext(p.getNext());
+		p.setNext(newNode);
+		length++;
+	}
+	
+	public String toString()
+	{
+		String s = "Length: " + length + "\n";
+		Node iterator = head.getNext();
+		for(int i = 0; i < length; i++)
+		{
+			s += (iterator.getData()) + " ";
+			iterator = iterator.getNext();
+		}
+		return s;
+	}
+}

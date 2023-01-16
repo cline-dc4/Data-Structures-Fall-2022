@@ -1,0 +1,15 @@
+
+public class Driver 
+{
+
+	public static void main(String[] args) 
+	{
+		SortedLinkedList ll = new SortedLinkedList();
+		
+		ll.addItem("University");
+		ll.addItem("Corban");
+		ll.addItem("Hello");
+		System.out.println(ll);
+	}
+
+}

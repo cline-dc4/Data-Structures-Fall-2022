@@ -1,0 +1,21 @@
+
+public class Main {
+
+	public static void main(String[] args) 
+	{
+		Event event1 = new Event();
+		Event event2 = new Event("Corban Graduation", 15000.0, 'i');
+		Event event3 = new Event("Soccer Opener", 1200.52, 'o');
+		
+		System.out.println(event1);
+		System.out.println(event2);
+		System.out.println(event3);
+		
+		event1.setName("Warrior Welcome");
+		System.out.println(event1);
+		
+		System.out.println(event1.getCost() + event2.getCost() + event3.getCost());
+
+	}
+
+}

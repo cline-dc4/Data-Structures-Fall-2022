@@ -1,0 +1,1 @@
+INDEX VERSION 1.131+D:\GitHub\Data-Structures-Fall-2022\CSC233-Code\.metadata\.plugins\org.eclipse.jdt.core

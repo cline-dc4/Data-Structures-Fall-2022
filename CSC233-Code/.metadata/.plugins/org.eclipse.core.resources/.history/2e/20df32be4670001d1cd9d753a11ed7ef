@@ -1,0 +1,201 @@
+import java.util.Random;
+
+/**
+ * The class that handles all the backend for the game
+ * Mastermind.
+ * @author DC
+ * @version 11/22/22
+ */
+public class MastermindBackend implements Backend
+{
+	/** stores how many guesses the user has made */
+	private int numberGuesses;
+
+	/** stores the code the user is guessing */
+	private char [] codeArray;
+
+	/** stores the current hint pegs the user is being given */
+	private int [] currentHint;
+
+	/** a 2D array that holds all guesses made during the game */
+	private char [][] guessHistoryArray;
+
+	/** a 2D array that holds all hints given during the game */
+	private int [][] hintHistoryArray;
+
+	/** a boolean that will break the game loop if true */
+	boolean win;
+
+	/**
+	 * the constructor for MastermindBackend
+	 * this sets all states to default values appropriate to the
+	 * rules of the Mastermind game.
+	 */
+	public MastermindBackend()
+	{
+		numberGuesses = 0;
+		codeArray = new char[4];
+		//generating the code here so array will never be empty.
+		generateCode();
+		currentHint = new int[2];
+		guessHistoryArray = new char[4][10];
+		hintHistoryArray = new int[2][10];
+		win = false;
+	}
+	
+	public int getNumberGuesses()
+	{
+		return numberGuesses;
+	}
+	
+	public void incrementNumberGuesses()
+	{
+		this.numberGuesses++;
+	}
+	
+	public int calculateScore()
+	{
+		return (11 - numberGuesses);
+	}
+
+	public boolean colorCheck(char guess, int index) throws Exception 
+	{
+		if(guess != COLOR_RED || guess != COLOR_BLUE || guess != COLOR_YELLOW
+				|| guess != COLOR_GREEN || guess != COLOR_ORANGE || guess != COLOR_BROWN)
+		{
+			//message helpful to dev and not user because user shouldn't get 
+			//to this point with an invalid char
+			throw new Exception("method colorCheck recieved an invalid char");
+		}
+		if(guess == codeArray[index])
+		{
+			return true;
+		}
+		return false;
+	}
+
+	public void checkHintPegs(char guess []) throws Exception
+	{
+
+		//this loop checks for black pegs and changes the guess array
+		//to avoid double counting.
+		for (int i = 0; i < codeArray.length; i++)
+		{
+			if(colorCheck(guess[i], i))
+			{
+				guess[i] = '~';
+				++currentHint[0];
+			}
+		}
+
+		//this nested loop checks for white pegs.
+		for (int i = 0; i < codeArray.length; i++)
+		{
+			for(int j = 0; j < codeArray.length; j++)
+			{
+				if(colorCheck(guess[i], j))
+				{
+					++currentHint[1];
+				}
+			}
+		}
+		
+		//win condition
+		if(currentHint[0] == 4)
+		{
+			win = true;
+		}
+
+		//update hintHistoryArray to save the hints given.
+		hintHistoryArray[numberGuesses][0] = currentHint[0];
+		hintHistoryArray[numberGuesses][1] = currentHint[1];
+	}
+
+	public void generateCode()
+	{
+		Random generator = new Random();
+		for (int i = 0; i < codeArray.length; i++)
+		{
+			switch(generator.nextInt() % 6)
+			{
+			case 0:
+			{
+				codeArray[i] = COLOR_RED;
+				break;
+			}
+			case 1:
+			{
+				codeArray[i] = COLOR_BLUE;
+				break;
+			}
+			case 2:
+			{
+				codeArray[i] = COLOR_YELLOW;
+				break;
+			}
+			case 3:
+			{
+				codeArray[i] = COLOR_GREEN;
+				break;
+			}
+			case 4:
+			{
+				codeArray[i] = COLOR_ORANGE;
+				break;
+			}
+			case 5:
+			{
+				codeArray[i] = COLOR_BROWN;
+				break;
+			}
+			}
+		}
+	}
+
+	public void submitGuess(char guessArray []) throws Exception 
+	{
+		//exceptions
+		for(int i = 0; i < guessArray.length; i++)
+		{
+			if(guessArray[i] != COLOR_RED || guessArray[i] != COLOR_BLUE || guessArray[i] != COLOR_YELLOW
+				|| guessArray[i] != COLOR_GREEN || guessArray[i] != COLOR_ORANGE || guessArray[i] != COLOR_BROWN)
+			{
+				throw new Exception("The guesses must be only the following characters: r, l, y, g, o, or b.");
+			}
+		}
+		//update guessHistoryArray
+		for(int i = 0; i < guessHistoryArray[numberGuesses].length; i++)
+		{
+			guessHistoryArray[numberGuesses][i] = guessArray[i];
+		}
+		
+		checkHintPegs(guessArray);
+
+	}
+
+	public String printHint() 
+	{
+		String hintString = "";
+		hintString += "Black: " + currentHint[0] + "  White: " + currentHint[1];
+		return hintString;
+	}
+
+	public String toString()
+	{
+		String boardString = "";
+		boardString += "Key: \nr: Red\nl: Blue\ny: Yellow\ng: Green\no: Orange\nb: Brown\n****************";
+		//prints out a line each iteration.
+		for (int i = 0; i < numberGuesses; i++)
+		{
+			//guesses
+			boardString += guessHistoryArray[i][0] + " " + guessHistoryArray[i][1] + " " +
+					guessHistoryArray[i][2] + " " + guessHistoryArray[i][3] + "  ";
+			//hints
+			boardString += "Hints: # black pegs: " + hintHistoryArray[i][0] + 
+					" # white pegs: " + hintHistoryArray[i][1] + "\n";
+		}
+		
+		return boardString;
+	}
+
+}

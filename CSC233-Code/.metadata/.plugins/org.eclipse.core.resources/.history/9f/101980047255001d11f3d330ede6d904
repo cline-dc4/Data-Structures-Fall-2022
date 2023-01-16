@@ -1,0 +1,37 @@
+
+public class Driver 
+{
+
+	public static void main(String[] args) 
+	{
+		SortedLinkedList ll = new SortedLinkedList();
+		
+		try
+		{
+		ll.addItem("University");
+		ll.addItem("Corban");
+		ll.addItem("Hello");
+		ll.addItem("Data");
+		//throws the exception:
+		ll.addItem("University");
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		System.out.println(ll);
+		
+		try
+		{
+			ll.deleteItem("Hello");
+			//throws the exception:
+			ll.deleteItem("asdf");
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		System.out.println(ll);
+	}
+
+}

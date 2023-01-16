@@ -1,0 +1,103 @@
+package application;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+
+/**
+ * The class that creates all GUI elements for the SportsEvent class.
+ * @author DC
+ * @version 10/2/22
+ */
+public class SportsEventPane extends GridPane implements EventHandler<ActionEvent>
+{
+	/**creates the TextField for the name of the event.*/
+	private TextField nameTF;
+	/**creates a ComboBox list for the location.*/
+	private ComboBox<String> locationCB;
+	/**creates the TextField for the cost*/
+	private TextField costTF;
+	/**creates the TextField for the name of the sport.*/
+	private TextField sportTF;
+	/**creates the TextField for the # of spectators.*/
+	private TextField spectatorTF;
+	/**creates the Button for submitting the entries.*/
+	private Button submitB;
+	/**allows SportsEventPane to interact with the center TextArea.*/
+	private TextArea centerTA;
+
+	/**
+	 * constructor that combines all the elements created
+	 * by the variables in the class.
+	 */
+	public SportsEventPane(TextArea centerTA)
+	{
+		//centerTA
+		this.centerTA = centerTA;
+		//nameTF
+		nameTF = new TextField();
+		this.add(new Label("Name: "), 0, 0);
+		add(nameTF, 1, 0);
+		//locationCB
+		locationCB = new ComboBox<String>();
+		locationCB.getItems().addAll("Indoors", "Outdoors");
+		this.add(new Label("Location: "), 0, 1);
+		add(locationCB, 1, 1);
+		//costTF
+		costTF = new TextField();
+		this.add(new Label("Cost: "), 0, 2);
+		add(costTF, 1, 2);
+		//sportTF
+		sportTF = new TextField();
+		this.add(new Label("Sport: "), 0, 3);
+		add(sportTF, 1, 3);
+		//spectatorTF
+		spectatorTF = new TextField();
+		this.add(new Label("Number of spectators: "), 0, 4);
+		add(spectatorTF, 1, 4);
+		//submitB
+		submitB = new Button("Submit Sports Event");
+		add(submitB, 0, 5);
+	}
+
+	@Override
+	public void handle(ActionEvent event) 
+	{
+		if(event.getSource() == submitB)
+		{
+			try
+			{
+				//name
+				String name = nameTF.getText();
+				//location
+				char location = 'i';
+				if(locationCB.getSelectionModel().getSelectedItem().equals("Indoors"))
+					location = 'i';
+				else if(locationCB.getSelectionModel().getSelectedItem().equals("Outdoors"))
+					location = 'o';
+				//cost
+				double cost = Double.parseDouble(costTF.getText());
+				//sport
+				String sport = sportTF.getText();
+				//spectators
+				int spectators = Integer.parseInt(spectatorTF.getText());
+				
+				Event sportEvent = new SportsEvent(name, cost, location, spectators, sport);
+				centerTA.appendText(sportEvent.toString());
+			}
+			catch(Exception e)
+			{
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setTitle("Error creating SportsEvent object");
+				alert.setContentText(e.getMessage());
+				alert.showAndWait();
+			}
+		}
+	}
+}

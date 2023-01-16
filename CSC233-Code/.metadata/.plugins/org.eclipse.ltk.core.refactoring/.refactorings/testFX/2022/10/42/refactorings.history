@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 2 elements to &apos;GenericsExample/src/(default package)&apos;&#x0D;&#x0A;- Original project: &apos;testFX&apos;&#x0D;&#x0A;- Destination element: &apos;GenericsExample/src/(default package)&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     application.Computer.java&#x0D;&#x0A;     application.LabComputer.java" description="Copy compilation units" destination="=GenericsExample/src&lt;" element1="/src&lt;application{Computer.java" element2="/src&lt;application{LabComputer.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1665414397886" units="2" version="1.0"/>
+</session>

@@ -1,0 +1,16 @@
+
+public class Driver 
+{
+
+	public static void main(String[] args) 
+	{
+		SortedLinkedList ll = new SortedLinkedList();
+		
+		ll.addItem("Why");
+		ll.addItem("hehe");
+		ll.addItem("qwerty");
+		ll.addItem("abcde");
+		System.out.println(ll);
+	}
+
+}

@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class ConsoleMain 
+{
+	/**
+	 * the main function for running Mastermind in the console.
+	 */
+	public static void main(String[] args)
+	{
+		//instance variables:
+		Scanner keyboard = new Scanner(System.in);
+		MastermindBackend game = new MastermindBackend();
+		while(game.getNumberGuesses() < 10 || !game.win)
+		{
+		System.out.println(game);
+			// TODO most of the code...
+			
+			//increase numberGuesses by 1.
+			game.incrementNumberGuesses();
+		}
+	}
+
+}
